@@ -333,6 +333,75 @@ try {
         .badge {
             font-size: 0.8rem;
         }
+        
+        /* MOBILE FIXES FOR DASHBOARD */
+        @media (max-width: 768px) {
+            /* Fix mobile logout visibility */
+            .admin-info {
+                display: none !important;
+            }
+            
+            .dropdown-menu {
+                min-width: 160px;
+                font-size: 0.9rem;
+            }
+            
+            .dropdown-menu .dropdown-item {
+                padding: 0.75rem 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .dropdown-menu .dropdown-item i {
+                width: 16px;
+                text-align: center;
+            }
+            
+            /* Ensure dropdown button is always visible */
+            .navbar .dropdown .btn {
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* MOBILE ACTION BUTTONS FIX */
+            .btn-group {
+                display: flex !important;
+                flex-wrap: nowrap;
+                gap: 2px;
+            }
+            
+            .btn-group .btn {
+                padding: 0.5rem 0.75rem !important;
+                font-size: 0.85rem !important;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px !important;
+                margin: 0 1px;
+            }
+            
+            .btn-group .btn i {
+                font-size: 1rem !important;
+            }
+            
+            /* Make table scrollable on mobile but keep buttons visible */
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Ensure action column stays fixed width */
+            .table td:last-child {
+                min-width: 150px;
+                white-space: nowrap;
+            }
+        }
     </style>
 </head>
 <body>

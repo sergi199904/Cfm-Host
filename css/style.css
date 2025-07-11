@@ -625,11 +625,14 @@ section h2:after {
   width: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
-  /* ELIMINAR ESPACIOS */
+  /* ELIMINAR ESPACIOS COMPLETAMENTE */
   margin: 0;
   padding: 0;
   border: none;
   display: block;
+  /* FORZAR QUE NO HAYA ESPACIO DEBAJO DE LA IMAGEN */
+  vertical-align: top;
+  line-height: 0;
 }
 
 .product-card:hover {

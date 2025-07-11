@@ -708,6 +708,22 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // ISSUE 2 FIX: Auto-close hamburger menu when nav link is clicked on mobile
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          // Close the navbar collapse on mobile when a link is clicked
+          if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+              toggle: false
+            });
+            bsCollapse.hide();
+          }
+        });
+      });
+
       // Inicializar carrusel con configuraciones personalizadas
       const carousel = new bootstrap.Carousel('#mainCarousel', {
         interval: 5000,

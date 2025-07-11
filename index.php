@@ -796,6 +796,37 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
         });
       });
 
+      // MOBILE MENU IMPROVEMENTS - Fix for mobile navigation
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const navbarCollapse = document.querySelector('#navbarNav');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const isClickInsideNav = navbarCollapse.contains(event.target);
+        const isClickOnToggler = navbarToggler.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnToggler && navbarCollapse.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+            toggle: false
+          });
+          bsCollapse.hide();
+        }
+      });
+
+      // Close menu when clicking on nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          // Only close if menu is currently open
+          if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+              toggle: false
+            });
+            bsCollapse.hide();
+          }
+        });
+      });
+
       // SCRIPT PARA VALIDACIONES DEL FORMULARIO DE CONTACTO
       const form = document.getElementById('contactForm');
       const nameInput = document.getElementById('name');

@@ -643,8 +643,9 @@ section h2:after {
 .product-card .card-img-top {
   height: 280px; /* Altura aumentada para eliminar espacio */
   width: 100%;
-  object-fit: cover; /* Asegurar que la imagen cubra todo el espacio sin distorsión */
+  object-fit: contain; /* Mostrar imagen completa sin recortar */
   object-position: center; /* Centrar la imagen */
+  aspect-ratio: 1/1; /* Mantener proporción cuadrada */
   transition: transform 0.4s ease;
   /* ELIMINAR ESPACIOS */
   margin: 0;
@@ -1045,6 +1046,8 @@ footer p, footer .small {
   
   .product-card .card-img-top {
     height: 250px; /* Ajustado para tablet */
+    object-fit: contain; /* Mostrar imagen completa sin recortar */
+    aspect-ratio: 1/1; /* Mantener proporción cuadrada */
   }
   
   .product-info {
@@ -1090,6 +1093,8 @@ footer p, footer .small {
   
   .product-card .card-img-top {
     height: 240px; /* Ajustado para móvil */
+    object-fit: contain; /* Mostrar imagen completa sin recortar */
+    aspect-ratio: 1/1; /* Mantener proporción cuadrada */
   }
   
   .product-info {

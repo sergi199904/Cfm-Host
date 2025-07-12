@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/db_test.php';
+require_once 'includes/db.php';
 
 // Filtro por categoría
 $categoria_filtro = isset($_GET['categoria']) ? limpiar_input($_GET['categoria']) : '';
@@ -49,10 +49,15 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       z-index: 1000;
       background: linear-gradient(45deg, #007bff, #0056b3);
       border: none;
-      border-radius: 50px;
-      padding: 15px 20px;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 4px 15px rgba(0,123,255,0.3);
       transition: all 0.3s ease;
+      font-size: 1.2rem;
     }
     
     .admin-btn:hover {
@@ -241,7 +246,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
 <body>
   <!-- Botón de administración -->
   <a href="admin/login.php" class="btn admin-btn text-white" title="Panel de Administración">
-    <i class="fas fa-cog"></i> Admin
+    <i class="fas fa-cog"></i>
   </a>
 
   <!-- Navbar -->
@@ -763,10 +768,10 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       // Efecto hover para el botón de admin
       const adminBtn = document.querySelector('.admin-btn');
       adminBtn.addEventListener('mouseenter', () => {
-        adminBtn.innerHTML = '<i class="fas fa-lock"></i> Acceso Seguro';
+        adminBtn.innerHTML = '<i class="fas fa-unlock"></i>';
       });
       adminBtn.addEventListener('mouseleave', () => {
-        adminBtn.innerHTML = '<i class="fas fa-cog"></i> Admin';
+        adminBtn.innerHTML = '<i class="fas fa-cog"></i>';
       });
 
       // Efecto adicional para los botones del carrusel

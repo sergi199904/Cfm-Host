@@ -422,15 +422,8 @@ try {
             </ul>
             
             <div class="d-flex align-items-center gap-3">
-                <!-- Admin info - visible on mobile in collapsed menu -->
+                <!-- Admin info - visible on desktop only -->
                 <div class="admin-info text-white d-none d-md-block">
-                    <i class="fas fa-user-shield"></i> 
-                    <span class="fw-bold"><?= htmlspecialchars($user_name) ?></span>
-                    <small class="d-block opacity-75"><?= htmlspecialchars($user_email) ?></small>
-                </div>
-                
-                <!-- Mobile admin info - shown in collapsed navbar -->
-                <div class="admin-info text-white d-md-none w-100 text-center mb-3" style="display: none;">
                     <i class="fas fa-user-shield"></i> 
                     <span class="fw-bold"><?= htmlspecialchars($user_name) ?></span>
                     <small class="d-block opacity-75"><?= htmlspecialchars($user_email) ?></small>
@@ -485,7 +478,7 @@ try {
     <!-- ESTADÍSTICAS -->
     <div class="row mb-4">
         <div class="col-md-3 mb-3">
-            <div class="card stats-card bg-primary text-white">
+            <div class="card stats-card bg-primary text-dark">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -499,7 +492,7 @@ try {
         </div>
         
         <div class="col-md-3 mb-3">
-            <div class="card stats-card bg-success text-white">
+            <div class="card stats-card bg-success text-dark">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -513,7 +506,7 @@ try {
         </div>
         
         <div class="col-md-3 mb-3">
-            <div class="card stats-card bg-warning text-white">
+            <div class="card stats-card bg-warning text-dark">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -527,7 +520,7 @@ try {
         </div>
         
         <div class="col-md-3 mb-3">
-            <div class="card stats-card bg-info text-white">
+            <div class="card stats-card bg-info text-dark">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -563,11 +556,11 @@ try {
                         
                         <div class="form-floating mb-3">
                             <input name="precio" id="precio" type="number" class="form-control" 
-                                   min="0" step="500" placeholder="15000" required>
+                                   min="0" step="1" placeholder="15000" required>
                             <label for="precio">
                                 <i class="fas fa-money-bill"></i> Precio (CLP)
                             </label>
-                            <small class="text-muted">Usar múltiplos de 500</small>
+                            <small class="text-muted">Precio en pesos chilenos</small>
                         </div>
                         
                         <div class="form-floating mb-3">
@@ -743,7 +736,7 @@ try {
                                                 </div>
                                                 
                                                 <!-- Mobile view: dropdown menu -->
-                                                <div class="dropdown d-md-none">
+                                                <div class="dropdown d-md-none d-none">
                                                     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
                                                             type="button" 
                                                             data-bs-toggle="dropdown" 
@@ -872,15 +865,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Auto-format price input
+    // Auto-format price input - Allow any value
     const priceInput = document.getElementById('precio');
     if (priceInput) {
         priceInput.addEventListener('input', function() {
+            // Allow any numeric value, no restriction to multiples of 500
             let value = parseInt(this.value);
-            if (value && value % 500 !== 0) {
-                // Round to nearest 500
-                value = Math.round(value / 500) * 500;
-                this.value = value;
+            if (value && value < 0) {
+                this.value = 0;
             }
         });
     }

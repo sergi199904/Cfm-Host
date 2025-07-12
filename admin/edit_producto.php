@@ -344,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input name="precio" type="number" class="form-control" 
-                                               min="0" step="500"
+                                               min="0" step="1"
                                                value="<?= htmlspecialchars($product['precio']) ?>" required>
                                     </div>
                                     <small class="text-muted">
@@ -470,11 +470,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const priceInput = document.querySelector('input[name="precio"]');
     if (priceInput) {
         priceInput.addEventListener('input', function() {
+            // Allow any numeric value, no restriction to multiples of 500
             let value = parseInt(this.value);
-            if (value && value % 500 !== 0) {
-                // Round to nearest 500
-                value = Math.round(value / 500) * 500;
-                this.value = value;
+            if (value && value < 0) {
+                this.value = 0;
             }
         });
     }

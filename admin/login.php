@@ -39,7 +39,7 @@ if (isset($_GET['registered']) && $_GET['registered'] === 'success') {
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     // Verificar que la sesión no haya expirado
     if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time']) < 3600) {
-        header('Location: dashboard.php');
+        header('Location: sistema/panel');
         exit;
     } else {
         // Sesión expirada, limpiar
@@ -59,7 +59,7 @@ if (!$error) {
         $_SESSION['login_time'] = time();
         
         error_log("CFM Login: Autenticado automáticamente por cookie válida - user_id: " . $auth_data['user_id']);
-        header('Location: dashboard.php');
+        header('Location: sistema/panel');
         exit;
     }
 }
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         error_log("CFM Session created: user_id=" . $user['id'] . ", session_id=" . session_id());
                         
                         // Redirigir al dashboard
-                        header('Location: dashboard.php');
+                        header('Location: sistema/panel');
                         exit;
                         
                     } else {

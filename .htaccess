@@ -16,12 +16,23 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
-# Reescribir URLs limpias para rutas específicas
-RewriteRule ^admin/?$ admin/login.php [NC,L]
+# Reescribir URLs limpias para rutas específicas - RUTAS PÚBLICAS
 RewriteRule ^productos/?$ index.php#productos [NC,L]
 RewriteRule ^contacto/?$ index.php#contacto [NC,L]
 RewriteRule ^historia/?$ index.php#historia [NC,L]
 RewriteRule ^ubicacion/?$ index.php#ubicacion [NC,L]
+
+# RUTAS ADMINISTRATIVAS OFUSCADAS - NO VISIBLES PARA USUARIOS
+RewriteRule ^sistema/acceso/?$ admin/login.php [NC,L]
+RewriteRule ^sistema/panel/?$ admin/dashboard.php [NC,L]
+RewriteRule ^sistema/productos/nuevo/?$ admin/subir_producto.php [NC,L]
+RewriteRule ^sistema/productos/editar/?$ admin/edit_producto.php [NC,L]
+RewriteRule ^sistema/salir/?$ admin/logout.php [NC,L]
+
+# Bloquear acceso directo a las rutas admin originales
+RewriteRule ^admin/login\.php$ - [F,L]
+RewriteRule ^admin/dashboard\.php$ - [F,L]
+RewriteRule ^admin/(.*)$ - [F,L]
 
 # Prevenir acceso directo a archivos sensibles
 RewriteRule ^includes/ - [F,L]

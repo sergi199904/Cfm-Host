@@ -239,9 +239,9 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
 </head>
 
 <body>
-  <!-- Botón de administración -->
-  <a href="admin/login.php" class="btn admin-btn text-white" title="Panel de Administración">
-    <i class="fas fa-cog"></i> Admin
+  <!-- Acceso discreto (oculto) -->
+  <a href="sistema/acceso" class="btn admin-btn text-white d-none" title="Acceso Sistema" style="opacity: 0.1; font-size: 8px;">
+    <i class="fas fa-cog"></i>
   </a>
 
   <!-- Navbar -->

@@ -123,7 +123,7 @@ if (!$user_authenticated) {
 // Si no está autenticado por ningún método, redirigir al login
 if (!$user_authenticated || !$user_id) {
     error_log("CFM Dashboard: NO AUTENTICADO - Redirigiendo a login");
-    header('Location: login.php');
+    header('Location: sistema/acceso');
     exit;
 }
 
@@ -172,7 +172,7 @@ if (isset($_GET['delete'])) {
         error_log("CFM Delete: Excepción: " . $e->getMessage());
     }
     
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -393,7 +393,7 @@ try {
 <!-- NAVBAR MEJORADA -->
 <nav class="navbar navbar-expand-lg navbar-dark shadow-lg sticky-top">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="dashboard.php">
+        <a class="navbar-brand d-flex align-items-center" href="sistema/panel">
             <i class="fas fa-gem me-2 text-warning"></i> 
             <span class="fw-bold">CFM Joyas Admin</span>
         </a>
@@ -405,7 +405,7 @@ try {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="dashboard.php">
+                    <a class="nav-link active" href="sistema/panel">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
@@ -544,7 +544,7 @@ try {
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form action="subir_producto.php" method="POST" enctype="multipart/form-data" id="addProductForm">
+                    <form action="sistema/productos/nuevo" method="POST" enctype="multipart/form-data" id="addProductForm">
                         
                         <div class="form-floating mb-3">
                             <input name="nombre" id="nombre" class="form-control" 
@@ -716,7 +716,7 @@ try {
                                             <td>
                                                 <!-- Desktop view: horizontal buttons -->
                                                 <div class="btn-group d-none d-md-flex" role="group">
-                                                    <a href="edit_producto.php?id=<?= $row['id'] ?>" 
+                                                    <a href="sistema/productos/editar?id=<?= $row['id'] ?>" 
                                                        class="btn btn-sm btn-outline-primary" 
                                                        title="Editar producto">
                                                         <i class="fas fa-edit"></i>
@@ -745,7 +745,7 @@ try {
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a class="dropdown-item" href="edit_producto.php?id=<?= $row['id'] ?>">
+                                                            <a class="dropdown-item" href="sistema/productos/editar?id=<?= $row['id'] ?>">
                                                                 <i class="fas fa-edit text-primary"></i> Editar
                                                             </a>
                                                         </li>
@@ -931,7 +931,7 @@ function deleteProduct(productId, productName) {
         }
         
         // Redirect to delete
-        window.location.href = `dashboard.php?delete=${productId}`;
+        window.location.href = `sistema/panel?delete=${productId}`;
     }
 }
 
@@ -967,7 +967,7 @@ function logoutUser() {
         document.cookie = "cfm_test=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         
         // Redirigir al logout
-        window.location.href = 'logout.php';
+        window.location.href = 'sistema/salir';
     }
 }
 

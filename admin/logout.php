@@ -78,6 +78,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Fecha en el pasado
 error_log("CFM Logout: Logout completo para $user_info - " . date('Y-m-d H:i:s'));
 
 // PASO 6: REDIRECCIÓN CON MENSAJE DE CONFIRMACIÓN
-header('Location: login.php?logout=success');
+header('Location: sistema/acceso?logout=success');
 exit;
 ?>

@@ -102,7 +102,7 @@ if (!$user_authenticated) {
 
 if (!$user_authenticated || !$user_id) {
     $_SESSION['error'] = 'Debe iniciar sesión para editar productos.';
-    header('Location: login.php');
+    header('Location: sistema/acceso');
     exit;
 }
 
@@ -110,7 +110,7 @@ if (!$user_authenticated || !$user_id) {
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id <= 0) {
     $_SESSION['error'] = 'ID de producto no válido.';
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -127,7 +127,7 @@ try {
     
     if (!$product) {
         $_SESSION['error'] = 'Producto no encontrado.';
-        header('Location: dashboard.php');
+        header('Location: sistema/panel');
         exit;
     }
     
@@ -136,7 +136,7 @@ try {
 } catch (Exception $e) {
     $_SESSION['error'] = 'Error buscando producto: ' . $e->getMessage();
     error_log("CFM Edit: Error buscando producto: " . $e->getMessage());
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt->execute()) {
                         $_SESSION['success'] = "Producto '$nombre' actualizado exitosamente.";
                         error_log("CFM Edit: Producto ID $id actualizado exitosamente");
-                        header('Location: dashboard.php');
+                        header('Location: sistema/panel');
                         exit;
                     } else {
                         $error = 'Error al actualizar el producto: ' . $stmt->error;
@@ -299,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <nav class="navbar navbar-dark shadow">
     <div class="container">
-        <a class="navbar-brand" href="dashboard.php">
+        <a class="navbar-brand" href="sistema/panel">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
         <span class="text-light">
@@ -416,7 +416,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <hr class="my-4">
                         
                         <div class="d-flex gap-2 justify-content-end">
-                            <a href="dashboard.php" class="btn btn-secondary">
+                            <a href="sistema/panel" class="btn btn-secondary">
                                 <i class="fas fa-times"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary" id="submitBtn">

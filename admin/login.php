@@ -321,10 +321,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-md-6 col-lg-4">
                 <div class="card login-card shadow-lg position-relative">
                     
-                    <!-- BOTÓN PARA REGISTRO -->
+                    <!-- BOTÓN PARA REGISTRO - OCULTO POR REQUERIMIENTO -->
+                    <!-- 
                     <button onclick="window.location.href='register.php'" 
                             class="secret-btn" 
                             title="Crear cuenta de administrador"></button>
+                    -->
                     
                     <div class="card-body p-5">
                         <div class="text-center mb-4">

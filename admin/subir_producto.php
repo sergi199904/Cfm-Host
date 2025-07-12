@@ -64,7 +64,7 @@ error_log("CFM Upload: Usuario autenticado - ID: $user_id");
 // PROCESAR SOLO SI ES POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['error'] = 'Método no permitido.';
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -133,7 +133,7 @@ if (!empty($errores)) {
     $error_msg = 'Errores: ' . implode(', ', $errores);
     $_SESSION['error'] = $error_msg;
     error_log("CFM Upload: Errores encontrados: $error_msg");
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -150,13 +150,13 @@ try {
     if ($row['count'] == 0) {
         $_SESSION['error'] = "Categoría '$categoria' no válida";
         error_log("CFM Upload: Error - Categoría no encontrada: '$categoria'");
-        header('Location: dashboard.php');
+        header('Location: sistema/panel');
         exit;
     }
 } catch (Exception $e) {
     $_SESSION['error'] = 'Error verificando categoría: ' . $e->getMessage();
     error_log("CFM Upload: Error BD categoría: " . $e->getMessage());
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -180,7 +180,7 @@ if (!is_dir($directorio_relativo)) {
     if (!mkdir($directorio_relativo, 0755, true)) {
         $_SESSION['error'] = 'No se pudo crear directorio de imágenes';
         error_log("CFM Upload: Error - No se pudo crear directorio");
-        header('Location: dashboard.php');
+        header('Location: sistema/panel');
         exit;
     }
 }
@@ -189,7 +189,7 @@ if (!is_dir($directorio_relativo)) {
 if (!is_writable($directorio_relativo)) {
     $_SESSION['error'] = 'Directorio sin permisos de escritura';
     error_log("CFM Upload: Error - Sin permisos de escritura en: $directorio_relativo");
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -199,7 +199,7 @@ error_log("CFM Upload: Moviendo archivo de " . $imagen['tmp_name'] . " a $ruta_c
 if (!move_uploaded_file($imagen['tmp_name'], $ruta_completa)) {
     $_SESSION['error'] = 'Error guardando imagen en servidor';
     error_log("CFM Upload: Error - No se pudo mover archivo");
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -209,7 +209,7 @@ error_log("CFM Upload: Imagen guardada exitosamente en: $ruta_completa");
 if (!file_exists($ruta_completa)) {
     $_SESSION['error'] = 'Archivo no se guardó correctamente';
     error_log("CFM Upload: Error - Archivo no existe después de mover");
-    header('Location: dashboard.php');
+    header('Location: sistema/panel');
     exit;
 }
 
@@ -251,7 +251,7 @@ try {
 $conn->close();
 
 // REDIRIGIR
-error_log("CFM Upload: Redirigiendo a dashboard.php");
-header('Location: dashboard.php');
+error_log("CFM Upload: Redirigiendo a sistema/panel");
+header('Location: sistema/panel');
 exit;
 ?>

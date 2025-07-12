@@ -1,1 +1,5 @@
 error_log
+vendor/
+# Test files for development
+includes/db_test.php
+tmp/test.db

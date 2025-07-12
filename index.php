@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/db.php';
+require_once 'includes/db_test.php';
 
 // Filtro por categoría
 $categoria_filtro = isset($_GET['categoria']) ? limpiar_input($_GET['categoria']) : '';

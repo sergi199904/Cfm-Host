@@ -512,12 +512,14 @@ section h2:after {
   }
   
   .carousel-title {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Better size for tablet */
+    line-height: 1.3;
   }
   
   .carousel-description {
     font-size: 1rem;
     margin-bottom: 20px;
+    line-height: 1.5;
   }
   
   .carousel-caption {
@@ -526,9 +528,10 @@ section h2:after {
   }
   
   .carousel-content {
-    padding: 18px;
+    padding: 16px 20px; /* Better padding for tablet */
     border-radius: 15px;
-    max-width: 90%;
+    max-width: 85%; /* Better width for tablet */
+    background: rgba(0,0,0,0.65); /* Good opacity for readability */
   }
   
   .carousel-control-prev,
@@ -563,8 +566,8 @@ section h2:after {
 
 @media (max-width: 480px) {
   .carousel-image-container {
-    height: 60vh;
-    min-height: 400px;
+    height: 65vh; /* Slightly taller for better mobile viewing */
+    min-height: 450px; /* Increased min height */
     padding: 0; /* SIN padding en móvil */
   }
   
@@ -583,20 +586,32 @@ section h2:after {
   }
   
   .carousel-title {
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Smaller title for mobile */
+    line-height: 1.3;
   }
   
   .carousel-description {
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Smaller description */
+    line-height: 1.4;
+    margin-bottom: 15px;
   }
   
   .carousel-content {
-    padding: 12px;
-    max-width: 95%;
+    padding: 10px 15px; /* More compact padding */
+    max-width: 90%; /* Narrower to avoid edge cutoff */
+    border-radius: 12px; /* Smaller border radius */
+    background: rgba(0,0,0,0.7); /* Slightly more opaque for better readability */
   }
   
   .carousel-caption {
-    padding: 15px 5px 20px;
+    padding: 10px 5px 15px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom to avoid text cutoff */
+  }
+  
+  .btn-carousel {
+    padding: 8px 20px; /* Smaller button */
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
   }
 }
 

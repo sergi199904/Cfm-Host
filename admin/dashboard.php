@@ -333,6 +333,59 @@ try {
         .badge {
             font-size: 0.8rem;
         }
+
+        /* Mobile responsive improvements */
+        @media (max-width: 767px) {
+            .navbar-collapse {
+                background: rgba(0,0,0,0.95);
+                border-radius: 10px;
+                margin-top: 10px;
+                padding: 15px;
+            }
+            
+            .admin-info {
+                display: block !important;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            
+            .dropdown-menu {
+                position: static !important;
+                transform: none !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                border: none !important;
+                margin-top: 10px !important;
+            }
+            
+            .dropdown-toggle::after {
+                display: none;
+            }
+            
+            /* Ensure buttons are visible on mobile */
+            .btn-group {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 2px !important;
+            }
+            
+            .btn-group .btn {
+                border-radius: 4px !important;
+                margin: 0 !important;
+                font-size: 0.75rem !important;
+                padding: 4px 8px !important;
+            }
+            
+            /* Make table more mobile friendly */
+            .table-responsive {
+                font-size: 0.8rem;
+            }
+            
+            .product-img {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -369,7 +422,15 @@ try {
             </ul>
             
             <div class="d-flex align-items-center gap-3">
+                <!-- Admin info - visible on mobile in collapsed menu -->
                 <div class="admin-info text-white d-none d-md-block">
+                    <i class="fas fa-user-shield"></i> 
+                    <span class="fw-bold"><?= htmlspecialchars($user_name) ?></span>
+                    <small class="d-block opacity-75"><?= htmlspecialchars($user_email) ?></small>
+                </div>
+                
+                <!-- Mobile admin info - shown in collapsed navbar -->
+                <div class="admin-info text-white d-md-none w-100 text-center mb-3" style="display: none;">
                     <i class="fas fa-user-shield"></i> 
                     <span class="fw-bold"><?= htmlspecialchars($user_name) ?></span>
                     <small class="d-block opacity-75"><?= htmlspecialchars($user_email) ?></small>
@@ -377,10 +438,18 @@ try {
                 
                 <div class="dropdown">
                     <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" 
-                            id="adminDropdown" data-bs-toggle="dropdown">
+                            id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user"></i>
+                        <span class="d-none d-md-inline ms-1">Admin</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <li class="d-md-none">
+                            <div class="dropdown-item-text text-center">
+                                <i class="fas fa-user-shield"></i> <?= htmlspecialchars($user_name) ?>
+                                <br><small class="text-muted"><?= htmlspecialchars($user_email) ?></small>
+                            </div>
+                        </li>
+                        <li class="d-md-none"><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="test_session.php">
                             <i class="fas fa-bug"></i> Test Sesiones
                         </a></li>
@@ -611,8 +680,9 @@ try {
                                         <th><i class="fas fa-tag"></i> Nombre</th>
                                         <th width="120"><i class="fas fa-money-bill"></i> Precio</th>
                                         <th width="100"><i class="fas fa-list"></i> Categoría</th>
-                                        <th width="100"><i class="fas fa-calendar"></i> Fecha</th>
-                                        <th width="140"><i class="fas fa-cogs"></i> Acciones</th>
+                                        <th width="100" class="d-none d-lg-table-cell"><i class="fas fa-calendar"></i> Fecha</th>
+                                        <th width="140" class="d-none d-md-table-cell"><i class="fas fa-cogs"></i> Acciones</th>
+                                        <th width="60" class="d-md-none text-center"><i class="fas fa-cogs"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -640,7 +710,7 @@ try {
                                                     <?= ucfirst(htmlspecialchars($row['categoria'])) ?>
                                                 </span>
                                             </td>
-                                            <td>
+                                            <td class="d-none d-lg-table-cell">
                                                 <small class="text-muted">
                                                     <i class="fas fa-clock"></i>
                                                     <?= date('d/m/Y', strtotime($row['fecha'])) ?>
@@ -651,7 +721,8 @@ try {
                                                 </small>
                                             </td>
                                             <td>
-                                                <div class="btn-group" role="group">
+                                                <!-- Desktop view: horizontal buttons -->
+                                                <div class="btn-group d-none d-md-flex" role="group">
                                                     <a href="edit_producto.php?id=<?= $row['id'] ?>" 
                                                        class="btn btn-sm btn-outline-primary" 
                                                        title="Editar producto">
@@ -669,6 +740,35 @@ try {
                                                             title="Eliminar producto">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+                                                </div>
+                                                
+                                                <!-- Mobile view: dropdown menu -->
+                                                <div class="dropdown d-md-none">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" 
+                                                            type="button" 
+                                                            data-bs-toggle="dropdown" 
+                                                            aria-expanded="false">
+                                                        <i class="fas fa-cog"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="edit_producto.php?id=<?= $row['id'] ?>">
+                                                                <i class="fas fa-edit text-primary"></i> Editar
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="<?= htmlspecialchars($row['instagram']) ?>" target="_blank">
+                                                                <i class="fab fa-instagram text-info"></i> Instagram
+                                                            </a>
+                                                        </li>
+                                                        <li><hr class="dropdown-divider"></li>
+                                                        <li>
+                                                            <a class="dropdown-item text-danger" href="#" 
+                                                               onclick="deleteProduct(<?= $row['id'] ?>, '<?= htmlspecialchars($row['nombre']) ?>'); return false;">
+                                                                <i class="fas fa-trash"></i> Eliminar
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </td>
                                         </tr>
@@ -782,6 +882,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 value = Math.round(value / 500) * 500;
                 this.value = value;
             }
+        });
+    }
+
+    // MOBILE IMPROVEMENTS - Navbar collapse behavior
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('#navbarNav');
+    
+    if (navbarToggler && navbarCollapse) {
+        // Show mobile admin info when navbar is toggled
+        navbarToggler.addEventListener('click', function() {
+            const mobileAdminInfo = document.querySelector('.admin-info.d-md-none');
+            if (mobileAdminInfo) {
+                setTimeout(() => {
+                    const isExpanded = navbarCollapse.classList.contains('show');
+                    mobileAdminInfo.style.display = isExpanded ? 'block' : 'none';
+                }, 350);
+            }
+        });
+        
+        // Close dropdown when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown-menu.show');
+            dropdowns.forEach(dropdown => {
+                const dropdownToggle = dropdown.previousElementSibling;
+                if (!dropdown.contains(event.target) && !dropdownToggle.contains(event.target)) {
+                    const bsDropdown = bootstrap.Dropdown.getInstance(dropdownToggle);
+                    if (bsDropdown) {
+                        bsDropdown.hide();
+                    }
+                }
+            });
         });
     }
     

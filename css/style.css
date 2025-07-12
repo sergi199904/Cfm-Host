@@ -597,15 +597,18 @@ section h2:after {
   }
   
   .carousel-content {
-    padding: 10px 15px; /* More compact padding */
-    max-width: 90%; /* Narrower to avoid edge cutoff */
-    border-radius: 12px; /* Smaller border radius */
-    background: rgba(0,0,0,0.7); /* Slightly more opaque for better readability */
+    padding: 8px 12px; /* More compact padding */
+    max-width: 88%; /* Narrower to avoid edge cutoff */
+    border-radius: 10px; /* Smaller border radius */
+    background: rgba(0,0,0,0.75); /* More opaque for better readability */
+    margin: 0 auto;
   }
   
   .carousel-caption {
-    padding: 10px 5px 15px; /* Reduced padding */
-    bottom: 10px; /* Closer to bottom to avoid text cutoff */
+    padding: 8px 5px 12px; /* More reduced padding */
+    bottom: 20px; /* Higher position to prevent overlap with image edge */
+    left: 6%;
+    right: 6%;
   }
   
   .btn-carousel {
@@ -633,18 +636,24 @@ section h2:after {
   /* ELIMINAR CUALQUIER ESPACIO */
   margin: 0;
   padding: 0;
+  /* Asegurar que el contenido llene completamente */
+  line-height: 0; /* Eliminar espacios entre elementos inline */
 }
 
 .product-card .card-img-top {
   height: 280px; /* Altura aumentada para eliminar espacio */
   width: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Asegurar que la imagen cubra todo el espacio sin distorsión */
+  object-position: center; /* Centrar la imagen */
   transition: transform 0.4s ease;
   /* ELIMINAR ESPACIOS */
   margin: 0;
   padding: 0;
   border: none;
   display: block;
+  /* Asegurar que no haya espacios blancos */
+  border-radius: 0;
+  background: #f5f5f5; /* Color de fondo para evitar flash blanco */
 }
 
 .product-card:hover {

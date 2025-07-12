@@ -247,7 +247,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg custom-nav">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img src="img/logooficial.jpg" alt="Logo" class="logo"> CFM Joyas
       </a>
       <button class="navbar-toggler custom-toggler" type="button"

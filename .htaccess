@@ -1,0 +1,64 @@
+# CFM Joyas - URL Rewriting Configuration
+# Para ocultar rutas internas y mostrar siempre https://cfmjoyas.cl/ como URL visible
+
+RewriteEngine On
+
+# Redirigir todas las solicitudes HTTP a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://cfmjoyas.cl/$1 [R=301,L]
+
+# Redirigir www a dominio sin www
+RewriteCond %{HTTP_HOST} ^www\.cfmjoyas\.cl [NC]
+RewriteRule ^(.*)$ https://cfmjoyas.cl/$1 [R=301,L]
+
+# Ocultar extensiones PHP
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Reescribir URLs limpias para rutas específicas
+RewriteRule ^admin/?$ admin/login.php [NC,L]
+RewriteRule ^productos/?$ index.php#productos [NC,L]
+RewriteRule ^contacto/?$ index.php#contacto [NC,L]
+RewriteRule ^historia/?$ index.php#historia [NC,L]
+RewriteRule ^ubicacion/?$ index.php#ubicacion [NC,L]
+
+# Prevenir acceso directo a archivos sensibles
+RewriteRule ^includes/ - [F,L]
+RewriteRule ^tmp/ - [F,L]
+RewriteRule ^vendor/ - [F,L]
+RewriteRule ^\.env - [F,L]
+
+# Headers de seguridad
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Configuración de compresión
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache control
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+</IfModule>
